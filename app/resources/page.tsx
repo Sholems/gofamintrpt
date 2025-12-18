@@ -1,9 +1,9 @@
 
 import React from 'react';
+import Link from 'next/link';
 import { Section } from '../../components/ui/Section';
 import { Container } from '../../components/layout/Container';
 import { Card } from '../../components/ui/Card';
-import { Link } from 'react-router-dom';
 
 export default function ResourcesPage() {
   return (
@@ -11,13 +11,13 @@ export default function ResourcesPage() {
       <Container>
         <h1 className="mb-12 text-4xl font-bold">Resources</h1>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <Link to="/resources/sermons">
+          <Link href="/resources/sermons">
             <Card className="hover:border-blue-400 transition-colors">
               <h3 className="text-xl font-bold">Sermon Archive</h3>
               <p className="mt-2 text-slate-600">Explore past teachings and messages.</p>
             </Card>
           </Link>
-          <Link to="/resources/gallery">
+          <Link href="/resources/gallery">
             <Card className="hover:border-blue-400 transition-colors">
               <h3 className="text-xl font-bold">Photo Gallery</h3>
               <p className="mt-2 text-slate-600">Visual highlights of our community and events.</p>

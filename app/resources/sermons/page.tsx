@@ -1,10 +1,13 @@
 
+'use client';
+
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { Section } from '../../../components/ui/Section';
 import { Container } from '../../../components/layout/Container';
 import { Badge } from '../../../components/ui/Badge';
 import { Button } from '../../../components/ui/Button';
-import { useParams, Link } from 'react-router-dom';
 import { BlogService, BlogPost } from '../../../lib/blog-service';
 
 export default function BlogPostPage() {
@@ -25,7 +28,7 @@ export default function BlogPostPage() {
             <div className="h-20 w-20 bg-brand-gold/10 rounded-3xl mx-auto flex items-center justify-center text-4xl">✨</div>
             <h1 className="text-4xl font-black text-brand-primary uppercase font-sans tracking-tighter">Article Not Found</h1>
             <p className="text-slate-500 font-light text-lg">We couldn't find the requested prophetic word. It may have been moved or is yet to be published.</p>
-            <Link to="/blog">
+            <Link href="/blog">
               <Button variant="outline" className="rounded-2xl px-8 py-4">Back to Chronicles</Button>
             </Link>
           </div>
@@ -117,7 +120,7 @@ export default function BlogPostPage() {
               )}
 
               <div className="pt-12 flex justify-center">
-                <Link to="/blog">
+                <Link href="/blog">
                    <Button variant="outline" className="rounded-2xl px-12 py-5 border-slate-200 text-slate-400 hover:text-brand-primary hover:border-brand-primary">
                       Back to All Chronicles
                    </Button>

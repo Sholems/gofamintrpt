@@ -4,9 +4,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { BlogService, BlogPost } from '../../../../lib/blog-service';
-import { Card } from '../../../../components/ui/Card';
-import { Button } from '../../../../components/ui/Button';
+import { BlogService, BlogPost } from '../../../../../lib/blog-service';
+import { Card } from '../../../../../components/ui/Card';
+import { Button } from '../../../../../components/ui/Button';
 
 export default function BlogEditorPage() {
   const params = useParams();
