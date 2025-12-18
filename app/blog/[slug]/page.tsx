@@ -42,7 +42,7 @@ export default function BlogPostPage() {
           <h2 className="text-2xl font-black text-brand-primary font-sans uppercase mb-8">
             Post Not Found
           </h2>
-          <p className="text-slate-600 mb-8">The blog post you're looking for doesn't exist.</p>
+          <p className="text-slate-600 mb-8">The blog post you&apos;re looking for doesn&apos;t exist.</p>
           <Link href="/blog">
             <Button variant="primary" className="rounded-2xl px-10 py-5">
               ← Back to Blog
@@ -102,7 +102,7 @@ export default function BlogPostPage() {
               {post.scripture}
             </p>
             <p className="text-lg font-serif italic text-slate-700 leading-relaxed">
-              "{post.scriptureText}"
+              &ldquo;{post.scriptureText}&rdquo;
             </p>
           </div>
 

@@ -150,7 +150,7 @@ export default function HomePage() {
                   At our church, you will experience heartfelt worship, sound biblical teaching, and a loving community committed to <span className="italic">living the Word, preaching the Word, and teaching the Word of God</span>. We believe every believer is called into a royal priesthood, chosen to walk in faith, purpose, and service.
                 </p>
                 <blockquote className="font-serif italic text-brand-primary text-lg sm:text-xl border-l-4 sm:border-l-8 border-brand-gold pl-6 sm:pl-10 py-4 bg-brand-offwhite rounded-r-3xl">
-                  "This is a place where Priesthood meets Royalty, where lives are transformed, faith is strengthened, and God’s presence is honored."
+                  &ldquo;This is a place where Priesthood meets Royalty, where lives are transformed, faith is strengthened, and God&apos;s presence is honored.&rdquo;
                 </blockquote>
                 <p>
                   We invite you to worship with us, connect with our ministries, and become part of what God is doing in our community.

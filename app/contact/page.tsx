@@ -265,7 +265,7 @@ export default function ContactPage() {
           </svg>
           <div>
             <p className="font-bold">Message Sent!</p>
-            <p className="text-sm opacity-90">We'll get back to you within 24 hours.</p>
+            <p className="text-sm opacity-90">We&apos;ll get back to you within 24 hours.</p>
           </div>
         </div>
       )}
@@ -561,7 +561,7 @@ export default function ContactPage() {
                   </div>
                   <div className="pt-6 sm:pt-8">
                     <p className="text-slate-300 font-serif italic text-base sm:text-lg leading-relaxed">
-                      "For where two or three are gathered together in my name, there am I in the midst of them."
+                      &ldquo;For where two or three are gathered together in my name, there am I in the midst of them.&rdquo;
                     </p>
                     <p className="mt-4 text-[10px] font-black uppercase tracking-widest text-brand-gold">— Matthew 18:20</p>
                   </div>

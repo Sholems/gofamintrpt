@@ -27,7 +27,7 @@ export default function BlogPostPage() {
           <div className="max-w-xl mx-auto space-y-8">
             <div className="h-20 w-20 bg-brand-gold/10 rounded-3xl mx-auto flex items-center justify-center text-4xl">✨</div>
             <h1 className="text-4xl font-black text-brand-primary uppercase font-sans tracking-tighter">Article Not Found</h1>
-            <p className="text-slate-500 font-light text-lg">We couldn't find the requested prophetic word. It may have been moved or is yet to be published.</p>
+            <p className="text-slate-500 font-light text-lg">We couldn&apos;t find the requested prophetic word. It may have been moved or is yet to be published.</p>
             <Link href="/blog">
               <Button variant="outline" className="rounded-2xl px-8 py-4">Back to Chronicles</Button>
             </Link>
@@ -54,7 +54,7 @@ export default function BlogPostPage() {
               {post.title}
             </h1>
             <p className="text-2xl md:text-3xl font-serif italic text-slate-300">
-              "{post.subtitle}"
+              &ldquo;{post.subtitle}&rdquo;
             </p>
           </div>
         </Container>
@@ -112,7 +112,7 @@ export default function BlogPostPage() {
                 <div className="pt-12 border-t border-slate-100">
                   <div className="p-12 rounded-[3rem] bg-brand-offwhite text-center space-y-6">
                     <p className="text-xl md:text-2xl font-serif italic text-brand-primary">
-                      "{post.closing}"
+                      &ldquo;{post.closing}&rdquo;
                     </p>
                     <p className="text-4xl font-black text-brand-gold font-sans uppercase tracking-[0.2em]">Amen.</p>
                   </div>

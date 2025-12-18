@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Button } from '../../components/ui/Button';
 import { AdminAuthService } from '../../lib/admin-auth';
 
@@ -112,12 +113,12 @@ export default function AdminLogin({ onSuccess }: AdminLoginProps) {
 
         {/* Back to website */}
         <div className="text-center mt-6">
-          <a 
+          <Link 
             href="/"
             className="text-white/60 hover:text-white text-sm font-medium transition-colors"
           >
             ← Back to Website
-          </a>
+          </Link>
         </div>
       </div>
     </div>

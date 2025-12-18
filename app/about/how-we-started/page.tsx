@@ -33,7 +33,7 @@ export default function HowWeStartedPage() {
                 The Gospel Faith Mission International, the Church with the Word for the World, founded on the Solid Rock by God, through a small group of committed men and women led by the late <span className="font-bold text-brand-primary">Pastor (Dr) R. A. George</span> in Lagos, Nigeria, has transformed into a divine legacy that has today assumed a global dimension.
               </p>
               <div className="bg-slate-50 p-8 rounded-2xl border-l-4 border-brand-gold italic text-slate-700 font-serif text-lg">
-                "It all began with Brother Reuben Akinwalere George, a dynamic leader who had always felt a deep conviction of the call of God on his life."
+                &ldquo;It all began with Brother Reuben Akinwalere George, a dynamic leader who had always felt a deep conviction of the call of God on his life.&rdquo;
               </div>
             </div>
             <div className="lg:w-1/2">
@@ -162,7 +162,7 @@ export default function HowWeStartedPage() {
                 By the grace and help of God, the fellowship has since moved into a small hotel room, marking a new phase of growth and expansion. Under the leadership of <span className="text-brand-gold font-bold">Pastors Christopher and Damilola Fasinu</span>, and with the support of a committed team, the work of God continues to grow and expand.
               </p>
               <p className="text-2xl font-serif italic text-brand-gold pt-8">
-                "By His grace, we are still growing and extending. To God be the glory."
+                &ldquo;By His grace, we are still growing and extending. To God be the glory.&rdquo;
               </p>
             </div>
             
