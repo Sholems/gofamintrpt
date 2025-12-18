@@ -332,7 +332,7 @@ export default function HomePage() {
 
                 <div className="mb-12 space-y-5">
                   <p className="font-serif text-xl md:text-2xl italic leading-snug text-slate-200/90 max-w-[90%]">
-                    "Whatever you give is acceptable if you give it eagerly. And give according to what you have, not what you don’t have."
+                    &ldquo;Whatever you give is acceptable if you give it eagerly. And give according to what you have, not what you don&apos;t have.&rdquo;
                   </p>
                   <div className="flex items-center gap-4">
                     <div className="h-px w-6 bg-brand-gold/40" />
