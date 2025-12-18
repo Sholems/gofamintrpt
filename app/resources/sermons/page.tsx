@@ -11,7 +11,8 @@ import { Button } from '../../../components/ui/Button';
 import { BlogService, BlogPost } from '../../../lib/blog-service';
 
 export default function BlogPostPage() {
-  const { slug } = useParams();
+  const params = useParams();
+  const slug = typeof params.slug === 'string' ? params.slug : undefined;
   const [post, setPost] = useState<BlogPost | undefined>();
 
   useEffect(() => {
