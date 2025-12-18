@@ -1,0 +1,5 @@
+{
+  "name": "gofamintrpt",
+  "description": "A modern, responsive Next.js-inspired React scaffold with multi-level navigation, reusable UI components, and a clean folder architecture for the GOFAMINT platform.",
+  "requestFramePermissions": []
+}
