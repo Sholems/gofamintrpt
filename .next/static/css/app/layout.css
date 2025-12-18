@@ -724,6 +724,12 @@ video {
 .top-full {
   top: 100%;
 }
+.right-4 {
+  right: 1rem;
+}
+.top-4 {
+  top: 1rem;
+}
 .z-0 {
   z-index: 0;
 }
@@ -1121,6 +1127,9 @@ video {
 .max-w-xl {
   max-width: 36rem;
 }
+.max-w-\[300px\] {
+  max-width: 300px;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1366,6 +1375,11 @@ video {
 }
 .overflow-y-auto {
   overflow-y: auto;
+}
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .whitespace-pre-wrap {
   white-space: pre-wrap;
@@ -1878,6 +1892,10 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+.px-2\.5 {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
 }
 .pb-12 {
   padding-bottom: 3rem;
@@ -2608,6 +2626,10 @@ video {
 
 .hover\:bg-white\/5:hover {
   background-color: rgb(255 255 255 / 0.05);
+}
+
+.hover\:bg-white\/10:hover {
+  background-color: rgb(255 255 255 / 0.1);
 }
 
 .hover\:text-brand-gold:hover {
