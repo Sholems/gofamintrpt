@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Card } from '../../components/ui/Card';
 import { BlogService } from '../../lib/blog-service';
 import { NavigationService } from '../../lib/navigation-service';
+import { ContactService, ContactMessage } from '../../lib/contact-service';
 import Link from 'next/link';
 import { cn } from '../../lib/utils';
 import { Button } from '../../components/ui/Button';
@@ -11,25 +12,40 @@ import { Button } from '../../components/ui/Button';
 export default function AdminOverviewPage() {
   const [postsCount, setPostsCount] = useState(0);
   const [menuCount, setMenuCount] = useState(0);
+  const [messagesCount, setMessagesCount] = useState(0);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [recentMessages, setRecentMessages] = useState<ContactMessage[]>([]);
 
   useEffect(() => {
     setPostsCount(BlogService.getAllPosts().length);
     setMenuCount(NavigationService.getMenu().length);
+    
+    const messages = ContactService.getAllMessages();
+    setMessagesCount(messages.length);
+    setUnreadCount(ContactService.getUnreadCount());
+    setRecentMessages(messages.slice(0, 4)); // Get last 4 messages
   }, []);
 
   const stats = [
-    { label: 'Published Words', val: postsCount, icon: '📜', color: 'bg-indigo-500' },
-    { label: 'Menu Items', val: menuCount, icon: '🗺️', color: 'bg-brand-gold' },
-    { label: 'Royal Members', val: '156', icon: '👑', color: 'bg-brand-primary' },
-    { label: 'Global Reach', val: '2.4k', icon: '🌍', color: 'bg-emerald-500' },
+    { label: 'Contact Messages', val: messagesCount, icon: '💬', color: 'bg-brand-primary', link: '/admin/messages' },
+    { label: 'Unread Messages', val: unreadCount, icon: '📩', color: unreadCount > 0 ? 'bg-red-500' : 'bg-emerald-500', link: '/admin/messages' },
+    { label: 'Blog Posts', val: postsCount, icon: '📜', color: 'bg-indigo-500', link: '/admin/blog' },
+    { label: 'Menu Items', val: menuCount, icon: '🗺️', color: 'bg-brand-gold', link: '/admin/navigation' },
   ];
 
-  const recentActivity = [
-    { type: 'blog', msg: 'New Prophetic Declaration added: December 2025', time: '2 hours ago' },
-    { type: 'nav', msg: 'Menu structure updated by Admin', time: '5 hours ago' },
-    { type: 'user', msg: 'New member registration from Morgantown', time: '1 day ago' },
-    { type: 'blog', msg: 'November 2025 word was edited', time: '2 days ago' },
-  ];
+  const formatTimeAgo = (isoString: string) => {
+    const date = new Date(isoString);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins} min ago`;
+    if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+    return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+  };
 
   return (
     <div className="space-y-12">
@@ -46,42 +62,67 @@ export default function AdminOverviewPage() {
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <Card key={stat.label} className="p-8 border-none shadow-xl rounded-[2.5rem] bg-white group hover:scale-[1.02] transition-all">
-            <div className={`h-12 w-12 rounded-2xl ${stat.color} text-white flex items-center justify-center text-xl mb-6 shadow-lg shadow-black/5 group-hover:rotate-12 transition-transform`}>
-              {stat.icon}
-            </div>
-            <p className="text-4xl font-black text-brand-primary tracking-tighter">{stat.val}</p>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-2">{stat.label}</p>
-          </Card>
+          <Link key={stat.label} href={stat.link}>
+            <Card className="p-8 border-none shadow-xl rounded-[2.5rem] bg-white group hover:scale-[1.02] transition-all cursor-pointer">
+              <div className={`h-12 w-12 rounded-2xl ${stat.color} text-white flex items-center justify-center text-xl mb-6 shadow-lg shadow-black/5 group-hover:rotate-12 transition-transform`}>
+                {stat.icon}
+              </div>
+              <p className="text-4xl font-black text-brand-primary tracking-tighter">{stat.val}</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-2">{stat.label}</p>
+            </Card>
+          </Link>
         ))}
       </div>
 
       <div className="grid gap-8 lg:grid-cols-3">
-        {/* Quick Actions */}
+        {/* Recent Messages */}
         <div className="lg:col-span-2 space-y-8">
           <Card className="p-10 border-none shadow-xl rounded-[3rem] bg-white overflow-hidden relative">
-            <div className="absolute top-0 right-0 p-12 opacity-[0.03] text-9xl font-black pointer-events-none tracking-tighter uppercase">Activity</div>
-            <h3 className="text-lg font-black uppercase tracking-widest text-brand-primary mb-8 border-b border-slate-50 pb-4">Recent Activity</h3>
-            <div className="space-y-6">
-              {recentActivity.map((act, i) => (
-                <div key={i} className="flex items-center justify-between group cursor-default">
-                  <div className="flex items-center gap-4">
-                    <div className={cn(
-                      "h-10 w-10 rounded-xl flex items-center justify-center text-lg",
-                      act.type === 'blog' ? 'bg-indigo-50 text-indigo-500' : 
-                      act.type === 'nav' ? 'bg-brand-gold/10 text-brand-gold' : 'bg-emerald-50 text-emerald-500'
-                    )}>
-                      {act.type === 'blog' ? '✍️' : act.type === 'nav' ? '🛠️' : '👤'}
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-brand-primary group-hover:text-brand-gold transition-colors">{act.msg}</p>
-                      <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">{act.time}</p>
-                    </div>
-                  </div>
-                  <button className="text-[10px] font-black uppercase tracking-widest text-slate-300 hover:text-brand-primary">View</button>
-                </div>
-              ))}
+            <div className="absolute top-0 right-0 p-12 opacity-[0.03] text-9xl font-black pointer-events-none tracking-tighter uppercase">Messages</div>
+            <div className="flex items-center justify-between mb-8 border-b border-slate-50 pb-4">
+              <h3 className="text-lg font-black uppercase tracking-widest text-brand-primary">Recent Messages</h3>
+              <Link href="/admin/messages" className="text-[10px] font-black uppercase tracking-widest text-brand-gold hover:text-brand-primary">
+                View All →
+              </Link>
             </div>
+            
+            {recentMessages.length === 0 ? (
+              <div className="text-center py-12">
+                <div className="text-5xl mb-4">📭</div>
+                <p className="text-slate-400 text-sm">No messages yet</p>
+                <p className="text-slate-300 text-xs mt-1">Messages from the contact form will appear here</p>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {recentMessages.map((msg) => (
+                  <Link key={msg.id} href="/admin/messages" className="flex items-center justify-between group cursor-pointer">
+                    <div className="flex items-center gap-4">
+                      <div className={cn(
+                        "h-10 w-10 rounded-xl flex items-center justify-center text-lg",
+                        msg.read ? 'bg-slate-100 text-slate-400' : 'bg-brand-gold/10 text-brand-gold'
+                      )}>
+                        {msg.read ? '✉️' : '📩'}
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm font-bold text-brand-primary group-hover:text-brand-gold transition-colors">
+                            {msg.fullName}
+                          </p>
+                          {!msg.read && (
+                            <span className="h-2 w-2 bg-brand-gold rounded-full animate-pulse" />
+                          )}
+                        </div>
+                        <p className="text-xs text-slate-500 truncate max-w-[300px]">{msg.subject}: {msg.message}</p>
+                        <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">
+                          {formatTimeAgo(msg.timestamp)}
+                        </p>
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-300 group-hover:text-brand-primary">View</span>
+                  </Link>
+                ))}
+              </div>
+            )}
           </Card>
 
           <div className="grid grid-cols-2 gap-8">
@@ -92,52 +133,62 @@ export default function AdminOverviewPage() {
                 <p className="text-xl font-black tracking-tight mt-2">New Article</p>
               </Card>
             </Link>
-            <Link href="/admin/navigation">
-              <Card className="p-8 border-none shadow-xl rounded-[2.5rem] bg-white text-brand-primary hover:border-brand-gold border transition-all">
-                <span className="text-2xl mb-4 block">🗺️</span>
-                <h4 className="font-black uppercase tracking-widest text-xs text-brand-gold">Structural</h4>
-                <p className="text-xl font-black tracking-tight mt-2">Edit Menu</p>
+            <Link href="/admin/messages">
+              <Card className="p-8 border-none shadow-xl rounded-[2.5rem] bg-white text-brand-primary hover:border-brand-gold border transition-all relative">
+                <span className="text-2xl mb-4 block">💬</span>
+                <h4 className="font-black uppercase tracking-widest text-xs text-brand-gold">Messages</h4>
+                <p className="text-xl font-black tracking-tight mt-2">View Inbox</p>
+                {unreadCount > 0 && (
+                  <span className="absolute top-4 right-4 bg-red-500 text-white text-xs font-black px-2.5 py-1 rounded-full">
+                    {unreadCount}
+                  </span>
+                )}
               </Card>
             </Link>
           </div>
         </div>
         
-        {/* System Health */}
+        {/* Quick Links & Status */}
         <div className="space-y-8">
           <Card className="p-10 border-none shadow-xl rounded-[3rem] bg-brand-primary text-white relative overflow-hidden group">
             <div className="absolute inset-0 bg-brand-gold opacity-0 group-hover:opacity-[0.03] transition-opacity" />
-            <h3 className="text-lg font-black uppercase tracking-widest text-brand-gold mb-8">Pulse Monitor</h3>
-            <div className="space-y-8">
-              <div className="space-y-2">
-                <div className="flex justify-between text-[10px] font-black uppercase tracking-[0.2em]">
-                  <span className="text-slate-400">Database Load</span>
-                  <span className="text-brand-gold">12%</span>
+            <h3 className="text-lg font-black uppercase tracking-widest text-brand-gold mb-8">Quick Actions</h3>
+            <div className="space-y-4">
+              <Link href="/admin/messages" className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
+                <span className="text-xl">💬</span>
+                <div className="flex-1">
+                  <p className="text-sm font-bold">Messages</p>
+                  <p className="text-[10px] text-slate-400">View contact submissions</p>
                 </div>
-                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-                  <div className="h-full bg-brand-gold w-[12%]" />
+                {unreadCount > 0 && (
+                  <span className="bg-red-500 text-xs font-black px-2 py-0.5 rounded-full">{unreadCount}</span>
+                )}
+              </Link>
+              <Link href="/admin/blog" className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
+                <span className="text-xl">📜</span>
+                <div className="flex-1">
+                  <p className="text-sm font-bold">Blog Posts</p>
+                  <p className="text-[10px] text-slate-400">Manage articles</p>
                 </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex justify-between text-[10px] font-black uppercase tracking-[0.2em]">
-                  <span className="text-slate-400">Media Storage</span>
-                  <span className="text-emerald-400">4.2 GB</span>
+                <span className="text-xs text-brand-gold">{postsCount}</span>
+              </Link>
+              <Link href="/admin/navigation" className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
+                <span className="text-xl">🗺️</span>
+                <div className="flex-1">
+                  <p className="text-sm font-bold">Navigation</p>
+                  <p className="text-[10px] text-slate-400">Edit menu structure</p>
                 </div>
-                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-                  <div className="h-full bg-emerald-400 w-[60%]" />
-                </div>
-              </div>
-              <div className="pt-4 border-t border-white/5">
-                <p className="text-[10px] font-bold text-slate-400 uppercase leading-relaxed">System protected by <br/>Royal Encryption Layers</p>
-              </div>
+                <span className="text-xs text-brand-gold">{menuCount}</span>
+              </Link>
             </div>
           </Card>
 
           <Card className="p-10 border-none shadow-xl rounded-[3rem] bg-white text-center">
-             <div className="h-20 w-20 rounded-full bg-slate-50 flex items-center justify-center text-3xl mx-auto mb-6">⚙️</div>
-             <h4 className="text-sm font-black text-brand-primary uppercase tracking-widest">Global Settings</h4>
-             <p className="text-[10px] text-slate-400 mt-2">Configure site-wide metadata and SEO parameters.</p>
-             <Link href="/admin/settings">
-               <Button variant="outline" className="mt-6 w-full rounded-xl border-slate-100">Open Panel</Button>
+             <div className="h-20 w-20 rounded-full bg-slate-50 flex items-center justify-center text-3xl mx-auto mb-6">🌐</div>
+             <h4 className="text-sm font-black text-brand-primary uppercase tracking-widest">Visit Website</h4>
+             <p className="text-[10px] text-slate-400 mt-2">Preview how visitors see your site.</p>
+             <Link href="/" target="_blank">
+               <Button variant="outline" className="mt-6 w-full rounded-xl border-slate-100">Open Website</Button>
              </Link>
           </Card>
         </div>
