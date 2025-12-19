@@ -91,12 +91,16 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ item, onClose }) => {
 export const MobileNav: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState<NavItemConfig[]>([]);
-
-  const fetchMenu = () => {
-    setMenu(NavigationService.getMenu());
-  };
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    const fetchMenu = () => {
+      if (typeof window !== 'undefined') {
+        setMenu(NavigationService.getMenu());
+      }
+    };
+    
     fetchMenu();
     window.addEventListener('navigationUpdate', fetchMenu);
     return () => window.removeEventListener('navigationUpdate', fetchMenu);
@@ -116,17 +120,13 @@ export const MobileNav: React.FC = () => {
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex flex-col bg-white transition-all animate-in fade-in duration-300">
           <div className="flex items-center justify-between px-6 h-20 border-b border-slate-50">
-            <div className="flex items-center gap-3">
-              <div className="h-12 shrink-0">
+            <div className="flex items-center">
+              <div className="h-16 shrink-0">
                 <img 
                   src="https://gofamintrpt.org/royalpriesthood.png" 
                   alt="Royal Priesthood Tabernacle" 
                   className="h-full w-auto object-contain"
                 />
-              </div>
-              <div className="flex flex-col leading-tight">
-                <span className="text-sm font-black uppercase tracking-tight text-brand-primary">Royal Priesthood</span>
-                <span className="text-[8px] font-bold uppercase tracking-widest text-slate-500">Tabernacle</span>
               </div>
             </div>
             <button

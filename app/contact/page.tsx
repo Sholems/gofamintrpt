@@ -169,10 +169,12 @@ export default function ContactPage() {
       formDataToSend.append('access_key', '660977c7-1efc-4f71-a554-08f60a45274d');
       formDataToSend.append('name', formData.fullName);
       formDataToSend.append('email', formData.email);
-      formDataToSend.append('phone', formData.phone || '');
-      formDataToSend.append('subject', `Contact Form: ${formData.subject}`);
+      if (formData.phone) {
+        formDataToSend.append('phone', formData.phone);
+      }
+      formDataToSend.append('subject', `${formData.subject} - Contact Form`);
       formDataToSend.append('message', formData.message);
-      formDataToSend.append('from_name', 'Royal Priesthood Tabernacle Website');
+      formDataToSend.append('from_name', 'Royal Priesthood Tabernacle');
       formDataToSend.append('replyto', formData.email);
       
       const response = await fetch('https://api.web3forms.com/submit', {
