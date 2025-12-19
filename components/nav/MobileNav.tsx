@@ -149,9 +149,9 @@ export const MobileNav: React.FC = () => {
             )}
           </nav>
           <div className="p-8 bg-slate-50 border-t border-slate-100">
-            <Link href="/contact" onClick={() => setIsOpen(false)}>
-              <Button variant="primary" className="w-full py-4">Contact Us</Button>
-            </Link>
+            <a href="https://www.paypal.com/ncp/payment/XMSZJWLSDFFQ2" target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)}>
+              <Button variant="primary" className="w-full py-4">Give</Button>
+            </a>
           </div>
         </div>
       )}
