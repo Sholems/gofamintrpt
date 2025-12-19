@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
              <div className="mb-6">
                 <div className="h-16">
                   <img 
-                    src="/churchlogo.jpeg" 
+                    src="/footer-logo.png" 
                     alt="Royal Priesthood Tabernacle" 
                     className="h-full w-auto object-contain"
                   />

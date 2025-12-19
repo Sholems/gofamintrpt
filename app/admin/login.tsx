@@ -40,7 +40,7 @@ export default function AdminLogin({ onSuccess }: AdminLoginProps) {
           <div className="text-center mb-10">
             <div className="mx-auto h-20 w-20 rounded-2xl overflow-hidden border-4 border-brand-gold/20 shadow-lg mb-6">
               <img 
-                src="/churchlogo.jpeg" 
+                src="/header-logo.png" 
                 alt="Royal Priesthood Tabernacle" 
                 className="h-full w-full object-cover"
               />

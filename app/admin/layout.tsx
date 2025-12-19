@@ -77,7 +77,7 @@ export default function AdminLayout({
           <Link href="/" className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-xl overflow-hidden border border-white/10">
               <img 
-                src="/churchlogo.jpeg" 
+                src="/header-logo.png" 
                 alt="Royal Priesthood Tabernacle Logo" 
                 className="h-full w-full object-cover"
               />

@@ -34,7 +34,7 @@ export const Navbar: React.FC = () => {
               isScrolled ? 'h-10' : 'h-14'
             }`}>
               <img 
-                src="/churchlogo.jpeg" 
+                src="/header-logo.png" 
                 alt="Royal Priesthood Tabernacle" 
                 className="h-full w-auto object-contain"
               />
