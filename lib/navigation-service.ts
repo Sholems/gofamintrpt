@@ -3,7 +3,7 @@ import { NavItemConfig } from './routes';
 
 const STORAGE_KEY = 'rpt_navigation_menu';
 
-const DEFAULT_NAV: NavItemConfig[] = [
+export const DEFAULT_NAV: NavItemConfig[] = [
   { label: 'Home', href: '/' },
   {
     label: 'About Us',
@@ -34,7 +34,14 @@ const DEFAULT_NAV: NavItemConfig[] = [
 ];
 
 export const NavigationService = {
+  getDefaultMenu: (): NavItemConfig[] => {
+    return DEFAULT_NAV;
+  },
+
   getMenu: (): NavItemConfig[] => {
+    if (typeof window === 'undefined') {
+      return DEFAULT_NAV;
+    }
     const stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_NAV));

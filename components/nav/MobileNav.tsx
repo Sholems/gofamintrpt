@@ -90,20 +90,21 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ item, onClose }) => {
 
 export const MobileNav: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [menu, setMenu] = useState<NavItemConfig[]>([]);
+  const [menu, setMenu] = useState<NavItemConfig[]>(() => NavigationService.getDefaultMenu());
 
   useEffect(() => {
     const fetchMenu = () => {
-      if (typeof window !== 'undefined') {
-        const menuData = NavigationService.getMenu();
-        console.log('Fetched menu:', menuData);
-        setMenu(menuData);
-      }
+      const menuData = NavigationService.getMenu();
+      console.log('Fetched menu:', menuData);
+      setMenu(menuData);
     };
     
     fetchMenu();
-    window.addEventListener('navigationUpdate', fetchMenu);
-    return () => window.removeEventListener('navigationUpdate', fetchMenu);
+    
+    if (typeof window !== 'undefined') {
+      window.addEventListener('navigationUpdate', fetchMenu);
+      return () => window.removeEventListener('navigationUpdate', fetchMenu);
+    }
   }, []);
 
   return (
