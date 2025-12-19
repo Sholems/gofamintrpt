@@ -119,7 +119,7 @@ export const MobileNav: React.FC = () => {
             <div className="flex items-center gap-3">
               <div className="h-12 shrink-0">
                 <img 
-                  src="/header-logo.png" 
+                  src="https://gofamintrpt.org/royalpriesthood.png" 
                   alt="Royal Priesthood Tabernacle" 
                   className="h-full w-auto object-contain"
                 />
