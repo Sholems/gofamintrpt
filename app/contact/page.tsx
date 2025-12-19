@@ -164,13 +164,20 @@ export default function ContactPage() {
         localStorage.setItem('gofamintrpt_contact_messages', JSON.stringify(messages));
       }
       
-      // Send to API endpoint (which will email to gofamintrpt@gmail.com)
-      const response = await fetch('/api/contact', {
+      // Send directly to Web3Forms using FormData
+      const formDataToSend = new FormData();
+      formDataToSend.append('access_key', '660977c7-1efc-4f71-a554-08f60a45274d');
+      formDataToSend.append('name', formData.fullName);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('phone', formData.phone || '');
+      formDataToSend.append('subject', `Contact Form: ${formData.subject}`);
+      formDataToSend.append('message', formData.message);
+      formDataToSend.append('from_name', 'Royal Priesthood Tabernacle Website');
+      formDataToSend.append('replyto', formData.email);
+      
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
+        body: formDataToSend
       });
       
       const data = await response.json();
@@ -191,7 +198,7 @@ export default function ContactPage() {
           setShowSuccess(false);
         }, 5000);
       } else {
-        throw new Error(data.error || 'Failed to send message');
+        throw new Error(data.message || 'Failed to send message');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
