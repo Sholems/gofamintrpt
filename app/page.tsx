@@ -136,7 +136,7 @@ export default function HomePage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
             <div className="space-y-8 sm:space-y-12 text-center">
               <header className="space-y-4 sm:space-y-6">
-                <Badge variant="gold" className="px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-brand-primary text-sm sm:text-base hidden ">A Message from our Pastors</Badge>
+                <Badge variant="gold" className="px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-brand-primary text-sm sm:text-base hidden">A Message from our Pastors</Badge>
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black font-sans text-brand-primary uppercase tracking-tighter leading-[1.05]">
                   Welcome to GOFAMINT <br/>
                   <span className="text-brand-gold">Royal Priesthood Tabernacle</span>
