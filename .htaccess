@@ -5,14 +5,3 @@ PassengerStartupFile server.js
 PassengerBaseURI /
 PassengerFriendlyErrorPages on
 PassengerEnv production
-
-# Serve public files directly
-RewriteEngine On
-RewriteBase /
-
-# Don't rewrite if it's a real file or directory
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-# Route all other requests to Passenger
-RewriteRule ^(.*)$ - [L]
