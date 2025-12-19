@@ -166,7 +166,7 @@ export default function ContactPage() {
       
       // Send directly to Web3Forms using FormData
       const formDataToSend = new FormData();
-      formDataToSend.append('access_key', '660977c7-1efc-4f71-a554-08f60a45274d');
+      formDataToSend.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '660977c7-1efc-4f71-a554-08f60a45274d');
       formDataToSend.append('name', formData.fullName);
       formDataToSend.append('email', formData.email);
       if (formData.phone) {

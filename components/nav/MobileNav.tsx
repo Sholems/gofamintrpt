@@ -95,16 +95,21 @@ export const MobileNav: React.FC = () => {
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
     const fetchMenu = () => {
-      if (typeof window !== 'undefined') {
-        setMenu(NavigationService.getMenu());
-      }
+      const menuData = NavigationService.getMenu();
+      console.log('Fetched menu:', menuData);
+      setMenu(menuData);
     };
     
-    fetchMenu();
-    window.addEventListener('navigationUpdate', fetchMenu);
-    return () => window.removeEventListener('navigationUpdate', fetchMenu);
-  }, []);
+    if (mounted) {
+      fetchMenu();
+      window.addEventListener('navigationUpdate', fetchMenu);
+      return () => window.removeEventListener('navigationUpdate', fetchMenu);
+    }
+  }, [mounted]);
 
   return (
     <div className="lg:hidden">
@@ -139,9 +144,13 @@ export const MobileNav: React.FC = () => {
             </button>
           </div>
           <nav className="flex-1 overflow-y-auto px-6 py-8">
-            {menu.map((route, i) => (
-              <AccordionItem key={`${route.label}-${i}`} item={route} onClose={() => setIsOpen(false)} />
-            ))}
+            {mounted && menu.length > 0 ? (
+              menu.map((route, i) => (
+                <AccordionItem key={`${route.label}-${i}`} item={route} onClose={() => setIsOpen(false)} />
+              ))
+            ) : (
+              <div className="text-center text-slate-400 py-8">Loading menu...</div>
+            )}
           </nav>
           <div className="p-8 bg-slate-50 border-t border-slate-100">
             <Link href="/contact" onClick={() => setIsOpen(false)}>
