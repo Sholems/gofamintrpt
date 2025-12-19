@@ -555,7 +555,7 @@ export default function ContactPage() {
                       <span className="font-light text-sm sm:text-base">Wed, 6:00 PM</span>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
-                      <span className="text-brand-gold font-bold uppercase text-[10px] tracking-widest">The King's Altar</span>
+                      <span className="text-brand-gold font-bold uppercase text-[10px] tracking-widest">The King&apos;s Altar</span>
                       <span className="font-light text-sm sm:text-base">Last Sunday</span>
                     </div>
                   </div>
