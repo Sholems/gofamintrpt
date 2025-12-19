@@ -1,55 +1,71 @@
 #!/usr/bin/env node
 
-const path = require('path')
-const fs = require('fs')
+process.env.NODE_ENV = 'production';
 
-const dir = path.join(__dirname)
+const { createServer } = require('http');
+const { parse } = require('url');
+const fs = require('fs');
+const path = require('path');
 
-process.env.NODE_ENV = 'production'
-process.chdir(__dirname)
+const PORT = process.env.PORT || 3000;
+const hostname = 'localhost';
 
-const currentPort = parseInt(process.env.PORT, 10) || 3000
-// For Passenger, listen on all interfaces
-const hostname = '0.0.0.0'
+let nextApp;
+let handler;
 
-let keepAliveTimeout = parseInt(process.env.KEEP_ALIVE_TIMEOUT, 10)
-
-// Read the config file
-const requiredServerFilesPath = path.join(dir, '.next', 'required-server-files.json')
-
-if (!fs.existsSync(requiredServerFilesPath)) {
-  console.error(`Error: ${requiredServerFilesPath} not found. Run 'npm run build' first.`)
-  process.exit(1)
+async function startServer() {
+  try {
+    // Import Next.js
+    const next = require('next');
+    
+    const dir = path.join(__dirname);
+    console.log(`Starting from directory: ${dir}`);
+    console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+    
+    // Create Next.js app
+    nextApp = next({ dev: false, dir });
+    handler = nextApp.getRequestHandler();
+    
+    // Prepare the app
+    await nextApp.prepare();
+    console.log('Next.js app prepared successfully');
+    
+    // Create HTTP server
+    const server = createServer((req, res) => {
+      const parsedUrl = parse(req.url, true);
+      handler(req, res, parsedUrl);
+    });
+    
+    server.listen(PORT, hostname, () => {
+      console.log(`✓ Server running on http://${hostname}:${PORT}`);
+      console.log(`✓ Ready to accept connections`);
+    });
+    
+    server.on('error', (err) => {
+      console.error('Server error:', err);
+      process.exit(1);
+    });
+    
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    console.error(error.stack);
+    process.exit(1);
+  }
 }
 
-const nextConfig = require(requiredServerFilesPath).config
-
-process.env.__NEXT_PRIVATE_STANDALONE_CONFIG = JSON.stringify(nextConfig)
-
-const { startServer } = require('next/dist/server/lib/start-server')
-
-if (
-  Number.isNaN(keepAliveTimeout) ||
-  !Number.isFinite(keepAliveTimeout) ||
-  keepAliveTimeout < 0
-) {
-  keepAliveTimeout = undefined
-}
-
-console.log(`Starting Next.js server on ${hostname}:${currentPort}`)
-
-startServer({
-  dir,
-  isDev: false,
-  config: nextConfig,
-  hostname,
-  port: currentPort,
-  allowRetry: false,
-  keepAliveTimeout,
-}).catch((err) => {
-  console.error('Failed to start server:', err);
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
   process.exit(1);
 });
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  process.exit(1);
+});
+
+startServer();
+
 
 
 
