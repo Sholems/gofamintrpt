@@ -547,16 +547,16 @@ export default function ContactPage() {
                   <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight font-sans">Our Service Times</h3>
                   <div className="space-y-4 sm:space-y-6">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border-b border-white/10 pb-4">
-                      <span className="text-brand-gold font-bold uppercase text-[10px] tracking-widest">Sunday Worship</span>
-                      <span className="font-light text-sm sm:text-base">9:00 AM — 11:30 AM</span>
+                      <span className="text-brand-gold font-bold uppercase text-[10px] tracking-widest">Crown of Thanksgiving</span>
+                      <span className="font-light text-sm sm:text-base">First Sunday</span>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border-b border-white/10 pb-4">
-                      <span className="text-brand-gold font-bold uppercase text-[10px] tracking-widest">Bible Study</span>
-                      <span className="font-light text-sm sm:text-base">6:00 PM — 7:30 PM</span>
+                      <span className="text-brand-gold font-bold uppercase text-[10px] tracking-widest">Royal Word & Prayer</span>
+                      <span className="font-light text-sm sm:text-base">Wed, 6:00 PM</span>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
-                      <span className="text-brand-gold font-bold uppercase text-[10px] tracking-widest">Prayer Hour</span>
-                      <span className="font-light text-sm sm:text-base">Fri, 6:00 PM</span>
+                      <span className="text-brand-gold font-bold uppercase text-[10px] tracking-widest">The King's Altar</span>
+                      <span className="font-light text-sm sm:text-base">Last Sunday</span>
                     </div>
                   </div>
                   <div className="pt-6 sm:pt-8">
