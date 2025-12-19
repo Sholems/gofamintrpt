@@ -15,8 +15,9 @@ export async function POST(request: Request) {
 
     // Check if Web3Forms key is configured
     const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+    const contactEmail = process.env.CONTACT_EMAIL || 'welcome@gofamintrpt.org';
     
-    if (accessKey && accessKey !== 'YOUR_WEB3FORMS_KEY') {
+    if (accessKey && accessKey !== 'your_web3forms_access_key_here') {
       // Try to send email via Web3Forms
       try {
         const web3FormsResponse = await fetch('https://api.web3forms.com/submit', {
@@ -30,9 +31,24 @@ export async function POST(request: Request) {
             name: fullName,
             email: email,
             phone: phone || '',
-            subject: `GOFAMINT Contact: ${subject}`,
-            message: message,
-            from_name: 'GOFAMINT Contact Form',
+            subject: `New Contact Form Submission: ${subject}`,
+            message: `
+You have received a new message from the Royal Priesthood Tabernacle contact form:
+
+Name: ${fullName}
+Email: ${email}
+Phone: ${phone || 'Not provided'}
+Subject: ${subject}
+
+Message:
+${message}
+
+---
+Reply directly to this email to respond to ${fullName}.
+            `.trim(),
+            from_name: 'Royal Priesthood Tabernacle Website',
+            to: contactEmail,
+            replyto: email,
           })
         });
 
