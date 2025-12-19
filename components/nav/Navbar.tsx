@@ -26,21 +26,17 @@ export const Navbar: React.FC = () => {
     }`}>
       <Container>
         <div className={`flex items-center justify-between transition-all duration-300 ${
-          isScrolled ? 'h-16' : 'h-24'
+          isScrolled ? 'h-16' : 'h-20'
         }`}>
           <Link href="/" className="flex items-center group">
             {/* Church Logo */}
             <div className={`relative shrink-0 transition-all duration-300 group-hover:scale-105 ${
-              isScrolled ? 'h-12' : 'h-20'
+              isScrolled ? 'h-10' : 'h-14'
             }`}>
               <img 
-                src="https://gofamintrpt.org/royalpriesthood.png" 
+                src="/header-logo.png" 
                 alt="Royal Priesthood Tabernacle" 
                 className="h-full w-auto object-contain"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = '/royalpriesthood.png';
-                }}
               />
             </div>
           </Link>
