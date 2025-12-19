@@ -1,0 +1,18 @@
+PassengerAppRoot /home/u108930548/domains/gofamintrpt.org/public_html
+PassengerAppType node
+PassengerNodejs /opt/alt/alt-nodejs22/root/bin/node
+PassengerStartupFile server.js
+PassengerBaseURI /
+PassengerFriendlyErrorPages on
+PassengerEnv production
+
+# Serve public files directly
+RewriteEngine On
+RewriteBase /
+
+# Don't rewrite if it's a real file or directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Route all other requests to Passenger
+RewriteRule ^(.*)$ - [L]
