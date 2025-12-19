@@ -31,7 +31,7 @@ export const metadata = {
     siteName: 'Royal Priesthood Tabernacle',
     images: [
       {
-        url: 'https://gofamintrpt.org/header-logo.png',
+        url: 'https://srv1004-files.hstgr.io/6647f127ba37cf46/files/public_html/public/footer-logo.png',
         width: 1200,
         height: 630,
         alt: 'Royal Priesthood Tabernacle',
@@ -44,7 +44,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Royal Priesthood Tabernacle | A Dwelling Place of God\'s Presence',
     description: 'Raising believers grounded in the Word, transformed by God\'s presence, and established in their royal priesthood in Christ.',
-    images: ['https://gofamintrpt.org/header-logo.png'],
+    images: ['https://srv1004-files.hstgr.io/6647f127ba37cf46/files/public_html/public/footer-logo.png'],
   },
 };
 
@@ -56,8 +56,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <head>
-        <link rel="icon" href="/header-logo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/header-logo.png" />
+        <link rel="icon" href="https://srv1004-files.hstgr.io/6647f127ba37cf46/files/public_html/public/header-logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="https://srv1004-files.hstgr.io/6647f127ba37cf46/files/public_html/public/header-logo.png" />
         <meta name="theme-color" content="#4a148c" />
       </head>
       <body className={inter.className}>
