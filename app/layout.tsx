@@ -20,8 +20,38 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: 'Royal Priesthood Tabernacle | GOFAMINT',
-  description: 'Raising believers who are grounded in the Word, transformed by God\'s presence, and established in their royal priesthood in Christ.',
+  title: 'Royal Priesthood Tabernacle | A Dwelling Place of God\'s Presence',
+  description: 'Welcome to Royal Priesthood Tabernacle - Raising believers grounded in the Word, transformed by God\'s presence, and established in their royal priesthood in Christ. Join us for worship, fellowship, and spiritual growth in Morgantown, WV.',
+  metadataBase: new URL('https://gofamintrpt.org'),
+  keywords: ['Royal Priesthood Tabernacle', 'GOFAMINT', 'Church Morgantown WV', 'Christian Church', 'Worship', 'Bible Study', 'Prayer', 'Kingdom Purpose', 'Royal Identity'],
+  authors: [{ name: 'Royal Priesthood Tabernacle' }],
+  openGraph: {
+    title: 'Royal Priesthood Tabernacle | A Dwelling Place of God\'s Presence',
+    description: 'Raising believers grounded in the Word, transformed by God\'s presence, and established in their royal priesthood in Christ.',
+    url: 'https://gofamintrpt.org',
+    siteName: 'Royal Priesthood Tabernacle',
+    images: [
+      {
+        url: 'https://gofamintrpt.org/royalpriesthood.png',
+        width: 1200,
+        height: 630,
+        alt: 'Royal Priesthood Tabernacle',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Royal Priesthood Tabernacle | A Dwelling Place of God\'s Presence',
+    description: 'Raising believers grounded in the Word, transformed by God\'s presence, and established in their royal priesthood in Christ.',
+    images: ['https://gofamintrpt.org/royalpriesthood.png'],
+  },
+  icons: {
+    icon: '/royalpriesthood.png',
+    shortcut: '/royalpriesthood.png',
+    apple: '/royalpriesthood.png',
+  },
 };
 
 export default function RootLayout({
