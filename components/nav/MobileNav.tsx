@@ -91,25 +91,20 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ item, onClose }) => {
 export const MobileNav: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState<NavItemConfig[]>([]);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const fetchMenu = () => {
-      const menuData = NavigationService.getMenu();
-      console.log('Fetched menu:', menuData);
-      setMenu(menuData);
+      if (typeof window !== 'undefined') {
+        const menuData = NavigationService.getMenu();
+        console.log('Fetched menu:', menuData);
+        setMenu(menuData);
+      }
     };
     
-    if (mounted) {
-      fetchMenu();
-      window.addEventListener('navigationUpdate', fetchMenu);
-      return () => window.removeEventListener('navigationUpdate', fetchMenu);
-    }
-  }, [mounted]);
+    fetchMenu();
+    window.addEventListener('navigationUpdate', fetchMenu);
+    return () => window.removeEventListener('navigationUpdate', fetchMenu);
+  }, []);
 
   return (
     <div className="lg:hidden">
@@ -144,7 +139,7 @@ export const MobileNav: React.FC = () => {
             </button>
           </div>
           <nav className="flex-1 overflow-y-auto px-6 py-8">
-            {mounted && menu.length > 0 ? (
+            {menu.length > 0 ? (
               menu.map((route, i) => (
                 <AccordionItem key={`${route.label}-${i}`} item={route} onClose={() => setIsOpen(false)} />
               ))
