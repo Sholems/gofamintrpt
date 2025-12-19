@@ -136,7 +136,7 @@ export default function HomePage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
             <div className="space-y-8 sm:space-y-12 text-center">
               <header className="space-y-4 sm:space-y-6">
-                <Badge variant="gold" className="px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-brand-primary text-sm sm:text-base">A Message from our Pastors</Badge>
+                <Badge variant="gold" className="px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-brand-primary text-sm sm:text-base hidden">A Message from our Pastors</Badge>
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black font-sans text-brand-primary uppercase tracking-tighter leading-[1.05]">
                   Welcome to GOFAMINT <br/>
                   <span className="text-brand-gold">Royal Priesthood Tabernacle</span>
@@ -159,13 +159,13 @@ export default function HomePage() {
                   You are welcome, valued, and loved.
                 </p>
               </div>
-              <div className="pt-8 sm:pt-12 flex justify-center items-center gap-4 sm:gap-6">
+              {/* <div className="pt-8 sm:pt-12 flex justify-center items-center gap-4 sm:gap-6">
                  <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-brand-primary/5 flex items-center justify-center text-brand-gold font-serif italic text-3xl sm:text-4xl font-bold border-2 border-brand-gold/10">C&D</div>
                  <div>
                     <p className="text-slate-400 text-[10px] sm:text-xs font-bold uppercase tracking-[0.4em] mb-1">With love and blessings,</p>
                     <h4 className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-brand-primary italic">Pastors Christopher & Damilola Fasinu</h4>
                  </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </Container>
