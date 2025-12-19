@@ -1,3 +1,21 @@
 {
-  "/page": "app/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
+  "/api/contact/route": "app/api/contact/route.js",
+  "/about/how-we-started/page": "app/about/how-we-started/page.js",
+  "/about/page": "app/about/page.js",
+  "/blog/[slug]/page": "app/blog/[slug]/page.js",
+  "/blog/page": "app/blog/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/ministries/page": "app/ministries/page.js",
+  "/resources/gallery/page": "app/resources/gallery/page.js",
+  "/resources/page": "app/resources/page.js",
+  "/resources/sermons/page": "app/resources/sermons/page.js",
+  "/watch-live/page": "app/watch-live/page.js",
+  "/admin/blog/edit/[id]/page": "app/admin/blog/edit/[id]/page.js",
+  "/admin/blog/new/page": "app/admin/blog/new/page.js",
+  "/admin/blog/page": "app/admin/blog/page.js",
+  "/admin/messages/page": "app/admin/messages/page.js",
+  "/admin/navigation/page": "app/admin/navigation/page.js",
+  "/admin/page": "app/admin/page.js"
 }
